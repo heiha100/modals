@@ -344,7 +344,10 @@ class _ModalAnchorState extends State<ModalAnchor> {
   @override
   void dispose() {
     for (final follower in _anchorMap[widget.tag]!.followers) {
-      _modalsMap.remove(follower);
+      final overlayEntry = _modalsMap.remove(follower);
+      if (overlayEntry != null) {
+        overlayEntry.remove();
+      }
     }
 
     _anchorMap.remove(widget.tag);
